@@ -6,8 +6,25 @@ namespace RomanNumeral2Integer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine("Just for the test script");
+            string one = "I";
+            string four = "IV";
+            string five = "V";
+            string nine = "IX";
+            string ten = "X";
+            string fifty = "L";
+            string hundred = "C";
+
+            int count = 0;
+            
+
+            Console.WriteLine("Please input a Roman Numeral");
+            string userInput = Console.ReadLine();
+            string upperString = userInput.ToUpper();
+            char[] splitInput = upperString.ToCharArray();
+            Console.WriteLine(splitInput);
+
+            
+            Console.WriteLine(count);
         }
     }
 }
