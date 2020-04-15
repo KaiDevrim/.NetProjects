@@ -7,6 +7,7 @@ namespace RomanNumeral2Integer
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Console.WriteLine("Just for the test script");
         }
     }
 }
