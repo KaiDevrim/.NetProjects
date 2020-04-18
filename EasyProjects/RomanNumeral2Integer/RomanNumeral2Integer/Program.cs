@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RomanNumeral2Integer
 {
@@ -18,13 +19,43 @@ namespace RomanNumeral2Integer
             
 
             Console.WriteLine("Please input a Roman Numeral");
-            string userInput = Console.ReadLine();
-            string upperString = userInput.ToUpper();
+            string upperString = Console.ReadLine().ToUpper();
             char[] splitInput = upperString.ToCharArray();
-            Console.WriteLine(splitInput);
 
-            
-            Console.WriteLine(count);
+            getRomanValue(upperString);
+
+            int getRomanValue (string Decimal)
+            {
+                foreach (char r in upperString)
+                {
+                    switch (r)
+                    {
+                        case 'I':
+                            count += 1;
+                            break;
+                        case 'V':
+                            count += 5;
+                            break;
+                        case 'X':
+                            count += 10;
+                            break;
+                        case 'L':
+                            count += 50;
+                            break;
+                        case 'C':
+                            count += 100;
+                            break;
+                        case 'D':
+                            count += 500;
+                            break;
+                        case 'M':
+                            count += 1000;
+                            break;
+                    }
+                }
+                return count;
+            }
+            Console.WriteLine(count.ToString());
         }
     }
 }
