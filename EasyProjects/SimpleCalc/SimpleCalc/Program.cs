@@ -11,40 +11,46 @@ namespace Calculator
             int FirstInput;
             while (!Int32.TryParse(Console.ReadLine(), out FirstInput))
             {
-               Console.WriteLine(wrong);
+                Console.WriteLine(wrong);
             }
             Console.Write("Enter the operation number: ");
             char OperationInput;
             while (!Char.TryParse(Console.ReadLine(), out OperationInput))
             {
-               Console.WriteLine(wrong);
+                Console.WriteLine(wrong);
             }
             Console.Write("Enter the second number: ");
             int SecondInput;
             while (!Int32.TryParse(Console.ReadLine(), out SecondInput))
             {
-               Console.WriteLine(wrong);
+                Console.WriteLine(wrong);
             }
-            if (OperationInput == '+')
+
+            switch (OperationInput)
             {
-               int result = FirstInput + SecondInput; //Add
-               Console.Write($"{correctinput} + {result}");
+                case '+':
+                    int ResultAdd = FirstInput + SecondInput; //Add
+                    Console.Write($"{correctinput}{ResultAdd}");
+                    break;
+
+                case '-':
+                    int ResultSubtract = FirstInput - SecondInput; //Add
+                    Console.Write($"{correctinput}{ResultSubtract}");
+                    break;
+
+                case '*':
+                    int ResultMultiply = FirstInput * SecondInput; //Add
+                    Console.Write($"{correctinput}{ResultMultiply}");
+                    break;
+
+                case '/':
+                    int ResultDivide = FirstInput / SecondInput; //Add
+                    Console.Write($"{correctinput}{ResultDivide}");
+                    break;
             }
-            if (OperationInput == '-') //Substract
-            {
-               int result = FirstInput - SecondInput;
-               Console.Write($"{correctinput} + {result}");
-            }
-            if (OperationInput == '*') //Multiply
-            {
-               int result = FirstInput * SecondInput;
-               Console.Write($"{correctinput} + {result}");
-            }
-            if (OperationInput == '/') //Divide
-            {
-               int result = FirstInput / SecondInput;
-               Console.Write($"{correctinput} + {result}");
-            }
+
             Console.ReadLine(); //Too keep the program running
+
         }
     }
+}
