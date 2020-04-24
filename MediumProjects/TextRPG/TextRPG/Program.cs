@@ -6,6 +6,8 @@ namespace TextRPG
     class Program
     {
         public static Player currentPlayer = new Player();
+        public static WizardStory wizard = new WizardStory();
+        
 
         static void Main(string[] args)
         {
@@ -14,6 +16,11 @@ namespace TextRPG
             Console.Clear();
             chooseName();
             chooseClass();
+
+            if (currentPlayer.classNum == 3)
+            {
+                wizard.Chapter1();
+            }
         }
 
         static void chooseName()
@@ -70,17 +77,20 @@ namespace TextRPG
                 else
                 {
                     Console.WriteLine("Please choose 1, 2, or 3");
+                    chooseClass();
                 }
 
                 currentPlayer.classNum = idontcare;
             }
-            catch (ArgumentException e)
+            catch (FormatException)
             {
                 Console.WriteLine("Please select your class again.");
                 chooseClass();
             }
              
         }
+
+        
     }
 }
 
