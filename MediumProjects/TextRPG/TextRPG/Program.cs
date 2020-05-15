@@ -3,15 +3,13 @@ using System.Threading;
 
 namespace TextRPG
 {
-    class Program
+    internal class Program
     {
         public static Player currentPlayer = new Player();
         public static WizardStory wizard = new WizardStory();
-        
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            
             Console.WriteLine("Hello World!");
             Console.Clear();
             chooseName();
@@ -23,24 +21,22 @@ namespace TextRPG
             }
         }
 
-        static void chooseName()
+        private static void chooseName()
         {
-            Console.WriteLine("You have selected this game to play. This game is about man vs monster and you are the main charcter. So what is your epic name?");
+            Console.WriteLine("You have selected this game to play. This game is about man vs monster and you are the main character. So what is your epic name?");
             currentPlayer.name = Console.ReadLine();
             Console.Clear();
             Console.WriteLine($"So, your name is {currentPlayer.name}! Interesting. Before you begin your quest, you must select a class.");
             Thread.Sleep(3000);
-
-
         }
 
-        static void chooseClass()
+        private static void chooseClass()
         {
             Console.Clear();
             Console.WriteLine("To select a class, please type in either 1, 2 or 3.");
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("1 - Warrior: A close-ranged fighter who will generally take damage while fighting. Also has the ability to block attacks which allow the user to heal a small amount of health inbetween turns.");
+            Console.WriteLine("1 - Warrior: A close-ranged fighter who will generally take damage while fighting. Also has the ability to block attacks which allow the user to heal a small amount of health in between turns.");
             Console.WriteLine();
             Console.WriteLine("2 - Archer: A distanced attacker who will rarely get hit during battle, but at the expense of less health and the need to charge the arrow between turns. Select this class if you want to have a challenge.");
             Console.WriteLine();
@@ -48,49 +44,32 @@ namespace TextRPG
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("So now it is time to pick a class. Choose carefully as you will not have the ability to change unless you delete the save file.");
-            string classSelect = Console.ReadLine();
 
-            try
+            int classSelect = currentPlayer.isInt(Console.ReadLine());
+
+            switch (classSelect)
             {
-                int idontcare = int.Parse(classSelect); 
-                if (idontcare == 1 || idontcare == 2 || idontcare == 3)
-                {
-                    currentPlayer.classNum = idontcare;
+                case 1:
+                    Console.WriteLine("You chose Warrior! Now go embark on your quest hero, " + currentPlayer.name);
+                    currentPlayer.classNum = 1;
+                    break;
 
-                    if (currentPlayer.classNum == 1)
-                    {
-                        Console.WriteLine("You chose Warrior! Now go embark on your quest hero, " + currentPlayer.name);
-                    }
-                    else if (currentPlayer.classNum == 2)
-                    {
-                        Console.WriteLine("You chose Archer! Now go embark on your quest hero, " + currentPlayer.name);
-                    }
-                    else if (currentPlayer.classNum == 3)
-                    {
-                        Console.WriteLine("You chose Wizard! Now go embark on your quest hero, " + currentPlayer.name);
-                    }
-                    else
-                    {
-                        Console.WriteLine("how did you get here?");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Please choose 1, 2, or 3");
+                case 2:
+                    Console.WriteLine("You chose Archer! Now go embark on your quest hero, " + currentPlayer.name);
+                    currentPlayer.classNum = 2;
+                    break;
+
+                case 3:
+                    Console.WriteLine("You chose Wizard! Now go embark on your quest hero, " + currentPlayer.name);
+                    currentPlayer.classNum = 3;
+                    break;
+
+                default:
+                    Console.WriteLine("Please enter 1, 2, or 3");
                     chooseClass();
-                }
-
-                currentPlayer.classNum = idontcare;
+                    break;
             }
-            catch (FormatException)
-            {
-                Console.WriteLine("Please select your class again.");
-                chooseClass();
-            }
-             
         }
-
-        
     }
 }
 
@@ -98,3 +77,13 @@ namespace TextRPG
 //Sword, Bow, Magic
 //After the class system is setup make a basic enemy and the attack system
 //Fight, inventory, make peace, or run
+
+/*    ///
+
+                    Console.WriteLine("You chose Wizard! Now go embark on your quest hero, " + currentPlayer.name);
+                else
+
+                    Console.WriteLine("How did you get here?");
+                    currentPlayer.classNum = classSelect;
+
+     */
