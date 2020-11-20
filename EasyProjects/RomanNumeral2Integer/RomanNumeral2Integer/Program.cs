@@ -1,61 +1,60 @@
 ﻿using System;
-using System.Collections.Generic;
-
 namespace RomanNumeral2Integer
 {
     class Program
     {
-        static void Main(string[] args)
+        static string[] ThousandLetters = { "", "M", "MM", "MMM" };
+        static string[] HundredLetters =
+            { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
+        static string[] TensLetters =
+            { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+        static string[] OnesLetters =
+            { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+
+        public static void Main()
         {
-            string one = "I";
-            string four = "IV";
-            string five = "V";
-            string nine = "IX";
-            string ten = "X";
-            string fifty = "L";
-            string hundred = "C";
-
-            int count = 0;
-            
-
-            Console.WriteLine("Please input a Roman Numeral");
-            string upperString = Console.ReadLine().ToUpper();
-            char[] splitInput = upperString.ToCharArray();
-
-            getRomanValue(upperString);
-
-            int getRomanValue (string Decimal)
+            Console.WriteLine("Please enter a number between 1 and 4000");
+            int arabic;
+            if (int.TryParse(Console.ReadLine(), out arabic))
             {
-                foreach (char r in upperString)
-                {
-                    switch (r)
-                    {
-                        case 'I':
-                            count += 1;
-                            break;
-                        case 'V':
-                            count += 5;
-                            break;
-                        case 'X':
-                            count += 10;
-                            break;
-                        case 'L':
-                            count += 50;
-                            break;
-                        case 'C':
-                            count += 100;
-                            break;
-                        case 'D':
-                            count += 500;
-                            break;
-                        case 'M':
-                            count += 1000;
-                            break;
-                    }
-                }
-                return count;
+                Console.WriteLine(ArabicToRoman(arabic));
             }
-            Console.WriteLine(count.ToString());
+        }
+        public static string ArabicToRoman(int arabic)
+        {
+            // See if it's >= 4000.
+            if (arabic >= 4000)
+            {
+                // Use parentheses.
+                int thou = arabic / 1000;
+                arabic %= 1000;
+                return "(" + ArabicToRoman(thou) + ")" +
+                    ArabicToRoman(arabic);
+            }
+
+            // Otherwise process the letters.
+            string result = "";
+
+            // Pull out thousands.
+            int num;
+            num = arabic / 1000;
+            result += ThousandLetters[num];
+            arabic %= 1000;
+
+            // Handle hundreds.
+            num = arabic / 100;
+            result += HundredLetters[num];
+            arabic %= 100;
+
+            // Handle tens.
+            num = arabic / 10;
+            result += TensLetters[num];
+            arabic %= 10;
+
+            // Handle ones.
+            result += OnesLetters[arabic];
+
+            return result;
         }
     }
 }
